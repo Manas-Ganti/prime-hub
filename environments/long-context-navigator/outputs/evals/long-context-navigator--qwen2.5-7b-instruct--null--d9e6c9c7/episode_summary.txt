@@ -1,0 +1,8 @@
+episodes: 50 completed, 0 errored
+  reward           -0.460 ± 0.019 (SE)
+  correct           0.000 ± 0.000 (SE)
+  ceiling           0.900 ± 0.043 (SE)
+  budget            0.020 ± 0.020 (SE)
+  steps_over_min    0.635 ± 0.103 (SE)
+  compress          0.020 ± 0.020 (SE)
+  accuracy by n_hops: 4: 0.000 (n=26), 5: 0.000 (n=24)

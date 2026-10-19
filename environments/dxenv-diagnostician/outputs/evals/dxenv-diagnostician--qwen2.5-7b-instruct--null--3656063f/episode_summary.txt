@@ -1,0 +1,12 @@
+episodes: 50 completed, 0 errored
+  reward (hub)     -0.602 ± 0.015 (SE)
+  source_reward    -0.602 ± 0.015 (SE)
+  diagnosis        -0.047 ± 0.012 (SE)
+  mass_on_truth     0.005 ± 0.005 (SE)
+  top1_correct      0.000 ± 0.000 (SE)
+  n_tests           4.260 ± 0.244 (SE)
+  n_turns          19.740 ± 0.178 (SE)
+  diagnosed         0.060 ± 0.034 (SE)
+  abstained         0.000 ± 0.000 (SE)
+  out_of_turns      0.940 ± 0.034 (SE)
+  decode_failure    0.000 ± 0.000 (SE)
