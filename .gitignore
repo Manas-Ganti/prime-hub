@@ -1,0 +1,15 @@
+# environments
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+*.egg-info/
+
+# reference clone (re-clone from github.com/PrimeIntellect-ai/verifiers)
+_ref/
+
+# local
+.DS_Store
+.env
+*.log

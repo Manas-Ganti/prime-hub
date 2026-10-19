@@ -1,0 +1,29 @@
+[project]
+name = "dxenv-diagnostician"
+version = "0.1.1"
+description = "Cost-aware diagnosis over synthetic patients: order tests (with committed result predictions), prescribe, then report a distribution over 149 conditions. Severity-weighted proper Brier score minus test and turn costs, with a computable Bayes-optimal ceiling. Procedural data, no judge."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Manas Ganti" }]
+keywords = ["medical", "diagnosis", "calibration", "proper-scoring-rule", "cost-aware", "multi-turn", "procedural", "rlvr"]
+dependencies = [
+    "verifiers==0.4.0",
+    "dxenv @ git+https://github.com/Manas-Ganti/healthcare-RL.git@5046c9242025a124099d8a12bdc174da219b0871",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["dxenv_diagnostician"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

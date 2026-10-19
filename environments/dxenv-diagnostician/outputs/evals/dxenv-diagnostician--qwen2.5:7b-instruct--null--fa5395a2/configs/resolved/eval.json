@@ -1,0 +1,541 @@
+{
+  "env": {
+    "taskset": {
+      "task": {
+        "judges": [],
+        "stops": {},
+        "metrics": {},
+        "rewards": {}
+      },
+      "system_prompt": null,
+      "id": "dxenv-diagnostician",
+      "split": "eval",
+      "num_tasks": null,
+      "budget": null,
+      "max_turns": 20
+    },
+    "timeout": {
+      "episode": null,
+      "finalize": null
+    },
+    "retries": {
+      "max_retries": 0,
+      "rules": []
+    },
+    "max_concurrent_agents": 1,
+    "interception": {
+      "type": "elastic",
+      "multiplex": 32
+    },
+    "id": "",
+    "diagnostician": {
+      "harness": {
+        "id": "null",
+        "env": {},
+        "forward_env": [],
+        "mcp_header_env": {},
+        "tool_timeout": 600.0,
+        "disabled_tools": null,
+        "skills": []
+      },
+      "runtime": {
+        "type": "subprocess"
+      },
+      "model": null,
+      "client": null,
+      "sampling": {
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "name": "dxenv_action",
+            "schema": {
+              "title": "dxenv_action",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "order_test"
+                    },
+                    "reasoning": {
+                      "type": "string",
+                      "maxLength": 700,
+                      "pattern": "^[^\"\\\\\\x00-\\x1f]{0,700}$",
+                      "description": "Why this action, given only what is on the case sheet. One or two sentences, at most 700 characters."
+                    },
+                    "test_key": {
+                      "enum": [
+                        "abdominal_us",
+                        "acetaminophen_level",
+                        "ammonia",
+                        "ana",
+                        "arterial_blood_gas",
+                        "b12_folate",
+                        "blood_culture",
+                        "bmp",
+                        "bnp",
+                        "bone_density",
+                        "carboxyhemoglobin",
+                        "cbc",
+                        "chest_xray",
+                        "cmp",
+                        "coagulation_panel",
+                        "cognitive_screen",
+                        "colonoscopy",
+                        "cortisol_am",
+                        "creatine_kinase",
+                        "crp",
+                        "ct_abdomen",
+                        "ct_chest",
+                        "ct_head",
+                        "d_dimer",
+                        "ecg",
+                        "echocardiogram",
+                        "electrolytes_focused",
+                        "esr",
+                        "glucose_fingerstick",
+                        "hba1c",
+                        "hcg_quant",
+                        "hemoglobin_only",
+                        "hepatitis_serology",
+                        "hip_xray",
+                        "hiv_test",
+                        "iron_studies",
+                        "joint_aspiration",
+                        "ketones",
+                        "lactate",
+                        "leg_doppler",
+                        "lipase",
+                        "lipid_panel",
+                        "liver_panel",
+                        "lumbar_puncture",
+                        "lyme_serology",
+                        "monospot",
+                        "mood_screen",
+                        "mri_brain",
+                        "pelvic_us",
+                        "peripheral_smear",
+                        "platelet_count",
+                        "procalcitonin",
+                        "pth",
+                        "rapid_strep",
+                        "renal_function",
+                        "respiratory_pcr",
+                        "reticulocyte_count",
+                        "rf_anti_ccp",
+                        "serum_osmolality",
+                        "skin_exam",
+                        "sleep_study",
+                        "spep",
+                        "spirometry",
+                        "stool_studies",
+                        "tb_igra",
+                        "thyroid_panel",
+                        "toxicology_screen",
+                        "troponin",
+                        "upper_endoscopy",
+                        "uric_acid",
+                        "urinalysis",
+                        "urine_culture",
+                        "vitamin_d"
+                      ]
+                    },
+                    "prediction": {
+                      "enum": [
+                        "low",
+                        "normal",
+                        "high",
+                        "normal_categorical",
+                        "abnormal_categorical"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "reasoning",
+                    "test_key",
+                    "prediction"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "prescribe"
+                    },
+                    "reasoning": {
+                      "type": "string",
+                      "maxLength": 700,
+                      "pattern": "^[^\"\\\\\\x00-\\x1f]{0,700}$",
+                      "description": "Why this action, given only what is on the case sheet. One or two sentences, at most 700 characters."
+                    },
+                    "treatment_key": {
+                      "enum": [
+                        "acetaminophen",
+                        "acyclovir_iv",
+                        "albuterol",
+                        "allopurinol",
+                        "amlodipine",
+                        "amoxicillin",
+                        "amoxicillin_clavulanate",
+                        "antiretroviral_therapy",
+                        "antitubercular_regimen",
+                        "apixaban",
+                        "aspirin",
+                        "atorvastatin",
+                        "azithromycin",
+                        "bisphosphonate",
+                        "calcium_gluconate",
+                        "cefazolin",
+                        "ceftriaxone",
+                        "ciprofloxacin",
+                        "clopidogrel",
+                        "colchicine",
+                        "dextrose_50",
+                        "digoxin",
+                        "doxycycline",
+                        "enoxaparin",
+                        "epinephrine_im",
+                        "furosemide",
+                        "heparin_infusion",
+                        "hydrocortisone_stress_dose",
+                        "hypertonic_saline",
+                        "ibuprofen",
+                        "inhaled_corticosteroid",
+                        "insulin_basal_bolus",
+                        "insulin_infusion",
+                        "iron_supplement",
+                        "iv_fluids_isotonic",
+                        "levetiracetam",
+                        "levofloxacin",
+                        "levothyroxine",
+                        "lisinopril",
+                        "lorazepam",
+                        "losartan",
+                        "magnesium_sulfate",
+                        "metformin",
+                        "methimazole",
+                        "metoprolol",
+                        "metronidazole",
+                        "morphine",
+                        "n_acetylcysteine",
+                        "naloxone",
+                        "nirmatrelvir_ritonavir",
+                        "nitrofurantoin",
+                        "nitroglycerin",
+                        "no_pharmacotherapy",
+                        "ondansetron",
+                        "oseltamivir",
+                        "pantoprazole",
+                        "penicillin_v",
+                        "piperacillin_tazobactam",
+                        "potassium_binder",
+                        "prednisone",
+                        "sacubitril_valsartan",
+                        "sertraline",
+                        "sumatriptan",
+                        "supplemental_oxygen",
+                        "thrombolysis",
+                        "trimethoprim_sulfamethoxazole",
+                        "urgent_specialty_referral",
+                        "urgent_surgical_referral",
+                        "vancomycin_iv",
+                        "vancomycin_oral",
+                        "vitamin_b12_injection",
+                        "vitamin_d_supplement"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "reasoning",
+                    "treatment_key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "diagnose"
+                    },
+                    "reasoning": {
+                      "type": "string",
+                      "maxLength": 700,
+                      "pattern": "^[^\"\\\\\\x00-\\x1f]{0,700}$",
+                      "description": "Why this action, given only what is on the case sheet. One or two sentences, at most 700 characters."
+                    },
+                    "diagnosis": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "condition": {
+                            "enum": [
+                              "acetaminophen_toxicity",
+                              "acute_appendicitis",
+                              "acute_bronchitis",
+                              "acute_cholecystitis",
+                              "acute_kidney_injury",
+                              "acute_leukemia",
+                              "acute_myocardial_infarction",
+                              "acute_pancreatitis",
+                              "acute_pericarditis",
+                              "acute_sinusitis",
+                              "adrenal_insufficiency",
+                              "alcohol_use_disorder",
+                              "alcoholic_hepatitis",
+                              "allergic_rhinitis",
+                              "alzheimer_dementia",
+                              "anaphylaxis",
+                              "anemia_of_chronic_disease",
+                              "aortic_dissection",
+                              "aortic_stenosis",
+                              "aspiration_pneumonia",
+                              "asthma_exacerbation",
+                              "atopic_dermatitis",
+                              "atrial_fibrillation",
+                              "attention_deficit_disorder",
+                              "b12_deficiency_anemia",
+                              "bacterial_meningitis",
+                              "bell_palsy",
+                              "benign_positional_vertigo",
+                              "benign_prostatic_hyperplasia",
+                              "bipolar_disorder",
+                              "carbon_monoxide_poisoning",
+                              "cardiac_tamponade",
+                              "celiac_disease",
+                              "cellulitis",
+                              "choledocholithiasis",
+                              "chronic_hepatitis_b",
+                              "chronic_hepatitis_c",
+                              "chronic_kidney_disease",
+                              "clostridioides_difficile_colitis",
+                              "colorectal_cancer",
+                              "community_acquired_pneumonia",
+                              "concussion",
+                              "contact_dermatitis",
+                              "copd_exacerbation",
+                              "covid19",
+                              "crohn_disease",
+                              "cushing_syndrome",
+                              "deep_vein_thrombosis",
+                              "diabetic_ketoacidosis",
+                              "diverticulitis",
+                              "dyslipidemia",
+                              "ectopic_pregnancy",
+                              "encephalitis",
+                              "epilepsy",
+                              "essential_hypertension",
+                              "fibromyalgia",
+                              "gastroesophageal_reflux",
+                              "generalized_anxiety_disorder",
+                              "giant_cell_arteritis",
+                              "glomerulonephritis",
+                              "gout",
+                              "guillain_barre_syndrome",
+                              "heart_failure_preserved_ef",
+                              "heart_failure_reduced_ef",
+                              "heat_stroke",
+                              "hemorrhagic_stroke",
+                              "hepatic_cirrhosis",
+                              "hip_fracture",
+                              "hiv_infection",
+                              "hypercalcemia",
+                              "hyperemesis_gravidarum",
+                              "hyperkalemia",
+                              "hyperosmolar_hyperglycemic_state",
+                              "hypertensive_emergency",
+                              "hyperthyroidism",
+                              "hypoglycemia",
+                              "hyponatremia",
+                              "hypothyroidism",
+                              "immune_thrombocytopenia",
+                              "infectious_mononucleosis",
+                              "infective_endocarditis",
+                              "influenza",
+                              "iron_deficiency_anemia",
+                              "irritable_bowel_syndrome",
+                              "ischemic_stroke",
+                              "lung_cancer",
+                              "lyme_disease",
+                              "lymphoma",
+                              "major_depressive_disorder",
+                              "mechanical_low_back_pain",
+                              "migraine",
+                              "multiple_myeloma",
+                              "multiple_sclerosis",
+                              "myocarditis",
+                              "necrotizing_fasciitis",
+                              "nephrolithiasis",
+                              "nephrotic_syndrome",
+                              "nonalcoholic_fatty_liver",
+                              "normal_pregnancy",
+                              "obstructive_sleep_apnea",
+                              "opioid_overdose",
+                              "opioid_use_disorder",
+                              "osteoarthritis",
+                              "osteomyelitis",
+                              "osteoporosis",
+                              "pancreatic_cancer",
+                              "parkinson_disease",
+                              "peptic_ulcer_disease",
+                              "peripheral_artery_disease",
+                              "peripheral_neuropathy",
+                              "pleural_effusion",
+                              "pneumothorax",
+                              "polymyalgia_rheumatica",
+                              "preeclampsia",
+                              "primary_hyperparathyroidism",
+                              "prostate_cancer",
+                              "psoriasis",
+                              "pulmonary_embolism",
+                              "pulmonary_fibrosis",
+                              "pyelonephritis",
+                              "rhabdomyolysis",
+                              "rheumatoid_arthritis",
+                              "schizophrenia",
+                              "sepsis",
+                              "septic_arthritis",
+                              "septic_shock",
+                              "sickle_cell_crisis",
+                              "small_bowel_obstruction",
+                              "stable_angina",
+                              "status_epilepticus",
+                              "streptococcal_pharyngitis",
+                              "subarachnoid_hemorrhage",
+                              "supraventricular_tachycardia",
+                              "systemic_lupus_erythematosus",
+                              "tension_headache",
+                              "thyroid_storm",
+                              "transient_ischemic_attack",
+                              "tuberculosis",
+                              "type_1_diabetes",
+                              "type_2_diabetes",
+                              "ulcerative_colitis",
+                              "unstable_angina",
+                              "upper_gi_bleed",
+                              "upper_respiratory_infection",
+                              "urinary_tract_infection",
+                              "urticaria",
+                              "viral_gastroenteritis",
+                              "viral_meningitis",
+                              "vitamin_d_deficiency"
+                            ]
+                          },
+                          "probability": {
+                            "type": "string",
+                            "pattern": "^(0|1|0\\.[0-9]{1,9})$"
+                          }
+                        },
+                        "required": [
+                          "condition",
+                          "probability"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "reasoning",
+                    "diagnosis"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "abstain"
+                    },
+                    "reasoning": {
+                      "type": "string",
+                      "maxLength": 700,
+                      "pattern": "^[^\"\\\\\\x00-\\x1f]{0,700}$",
+                      "description": "Why this action, given only what is on the case sheet. One or two sentences, at most 700 characters."
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "reasoning"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        }
+      },
+      "max_turns": null,
+      "max_input_tokens": null,
+      "max_output_tokens": null,
+      "max_total_tokens": null,
+      "timeout": {
+        "setup": null,
+        "rollout": null,
+        "finalize": null,
+        "scoring": null
+      },
+      "retries": {
+        "max_retries": 0,
+        "rules": []
+      },
+      "network_notice": true
+    }
+  },
+  "run": {
+    "name": "dxenv-diagnostician--qwen2.5:7b-instruct--null--fa5395a2",
+    "dir": "dxenv-diagnostician--qwen2.5:7b-instruct--null--fa5395a2",
+    "attach": null
+  },
+  "model": "qwen2.5:7b-instruct",
+  "client": {
+    "base_url": "http://localhost:11434/v1",
+    "api_key_var": "OLLAMA_KEY",
+    "headers": {},
+    "headers_from_env": {},
+    "timeout": {
+      "connect": 30.0,
+      "read": null,
+      "write": null,
+      "pool": null
+    },
+    "type": "eval"
+  },
+  "sampling": {
+    "temperature": 1.0,
+    "top_p": null,
+    "reasoning_effort": null,
+    "max_tokens": 1024
+  },
+  "select": {
+    "include": {
+      "idx": [],
+      "ids": [],
+      "keys": [],
+      "names": []
+    },
+    "exclude": {
+      "idx": [],
+      "ids": [],
+      "keys": [],
+      "names": []
+    },
+    "shuffle": false,
+    "seed": 0,
+    "skip": 0,
+    "limit": 5
+  },
+  "num_rollouts": 1,
+  "max_concurrent": 1,
+  "verbose": false,
+  "rich": {
+    "show_logs": false
+  },
+  "push": false,
+  "output_dir": "environments/dxenv-diagnostician/outputs/evals"
+}

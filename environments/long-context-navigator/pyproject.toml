@@ -1,0 +1,30 @@
+[project]
+name = "long-context-navigator"
+version = "0.1.1"
+description = "Multi-hop QA over a ~32k-token document under a hard 600-token working-context ceiling: the agent must READ, COMPRESS and DROP to carry bridge entities. Stateless per-step policy, exact-match reward, procedurally generated and validated instances."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Manas Ganti" }]
+keywords = ["long-context", "multi-hop", "memory", "compression", "navigation", "multi-turn", "procedural", "rlvr"]
+dependencies = [
+    "verifiers==0.4.0",
+    "longctx-nav @ git+https://github.com/Manas-Ganti/long-context-navigator.git@baeb4334b1dbea8f16c1155be53722c2dc3a2d73",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["long_context_navigator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
