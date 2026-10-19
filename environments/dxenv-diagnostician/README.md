@@ -168,11 +168,23 @@ when computing advantages.
 
 ## Baseline results (vf-eval, this package)
 
-*Pending: no vf-eval run against a real model has been recorded yet.*
+Per-episode means from `scripts/episode_summary.py`. The run: `vf-eval -n 50 -r 1`, T = 1.0,
+1024 max tokens per turn, 20-turn cap, budgets drawn per patient. The model was served
+unquantized (bf16) by vLLM 0.8.5 on one A100 and took 9 minutes.
 
 | model | split | episodes | reward (mean ± SE) | source_reward | top-1 | tests / episode | decode failures |
 |---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | — |
+| Qwen2.5-7B-Instruct | eval | 50 | −0.602 ± 0.015 | −0.602 | 0.00 | 4.26 | 0 |
+
+The untrained 7B model doesn't commit to a diagnosis:
+- **94%** of its episodes ran out of turns, averaging 19.7 of 20 turns;
+- 6% diagnosed;
+- the mean probability it put on the true condition was 0.005.
+
+Most of the score is the turn penalty (−0.40) and test costs (−0.14), which puts it below the
+−0.019 floor of reporting the prior and stopping. It never prescribed, so the coherence fix
+didn't change its score (`source_reward` = reward). The original work saw the same behaviour
+from the same model (see below), and it's the headroom RL is meant to close.
 
 **Model-free reference policies** on the same first 50 patients and budgets a `-n 50` run
 sees. These are the source repo's heuristic policies, scored by this package's reward

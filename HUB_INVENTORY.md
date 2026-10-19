@@ -13,8 +13,8 @@ and the chemical plant safety monitor.
 
 | # | Env (proposed Hub name) | Source | Verdict | Reward one-liner | Blockers | Status |
 |---|---|---|---|---|---|---|
-| 1 | `long-context-navigator` | `long-context-navigator-RL/` | **Native** | exact-match answer, -0.5 on ceiling/budget failure, small efficiency term | no exploit found; **needs model credentials for 5/50-task evals**; source repo now MIT (baeb433) | **Packaged** (`environments/long-context-navigator`): 50/50 tests pass (parity + exploits), stub-model vf-eval end-to-end OK; real evals pending |
-| 2 | `dxenv-diagnostician` | `healthcare_RL/` | **Native** | severity-weighted shifted Brier − test costs − turns + treatment + predict-then-verify | coherence exploit **fixed** in v0.1 (`coherence × mass_on_truth`; +0.46 → −0.03, parity break documented); parse failures → `decode_failure` (source rule); **needs model credentials for evals**; source repo now MIT (5046c92) | **Packaged** (`environments/dxenv-diagnostician`): 80/80 tests pass (62-episode parity replay + 15 exploit tests), stub-model vf-eval end-to-end OK; real evals pending |
+| 1 | `long-context-navigator` | `long-context-navigator-RL/` | **Native** | exact-match answer, -0.5 on ceiling/budget failure, small efficiency term | no exploit found; **needs model credentials for 5/50-task evals**; source repo now MIT (baeb433) | **Packaged** (`environments/long-context-navigator`): 50/50 tests pass (parity + exploits); vf-eval Qwen2.5-7B (vLLM bf16, n=50): id_test −0.350 ± 0.033, ood_test −0.460 ± 0.019, accuracy 0/0 |
+| 2 | `dxenv-diagnostician` | `healthcare_RL/` | **Native** | severity-weighted shifted Brier − test costs − turns + treatment + predict-then-verify | coherence exploit **fixed** in v0.1 (`coherence × mass_on_truth`; +0.46 → −0.03, parity break documented); parse failures → `decode_failure` (source rule); **needs model credentials for evals**; source repo now MIT (5046c92) | **Packaged** (`environments/dxenv-diagnostician`): 80/80 tests pass (62-episode parity replay + 15 exploit tests); vf-eval Qwen2.5-7B (vLLM bf16, n=50, eval split): −0.602 ± 0.015, 94% out of turns, 0 decode failures |
 | 3 | `vlm-image-forensics` | `VLM-RL-aicontent-detection/` | **Native** (not publishable yet) | ±1 verdict + 0.4 Brier(P(fake)) + 0.3 consistency − inspects − confident-wrong | **no-look exploit (+0.50)**; synth1024 not hosted; **DIV2K is academic-research-only, copyright with original owners: cannot be rehosted** (see report §5) | Phase 2 done |
 | 4 | `nl-sql-chinook` | `NL-SQL-agent/` | Data/eval only | result-set equivalence vs reference SQL; refuse/clarify match | 55 items, near ceiling; verify Chinook MIT license | Phase 2 done |
 | 5 | `optimal-stopping` | `finance-rl/` | Wrappable (new benchmark) | MC value of the agent's exercise boundary vs the exact Bermudan price | design work; per-step framing too noisy | Phase 2 done |
@@ -58,7 +58,7 @@ meaning the exploits are live in the source reward code).
 
 | env | Hub | version | visibility | notes |
 |---|---|---|---|---|
-| long-context-navigator | manasganti/long-context-navigator | 0.1.1 | PUBLIC (2026-10-18) | baseline numbers pending → next push as 0.1.2 with `prime env push -p environments/long-context-navigator --auto-bump` |
-| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.1 | PUBLIC (2026-10-18) | includes the structured-output schema fix; baseline numbers go out as 0.1.2 |
+| long-context-navigator | manasganti/long-context-navigator | 0.1.1 | PUBLIC (2026-10-18) | baselines in README (ARC vLLM run 2026-10-19); 0.1.2 awaiting approval: `prime env push -p environments/long-context-navigator --auto-bump` |
+| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.1 | PUBLIC (2026-10-18) | includes the structured-output schema fix; baselines in README; 0.1.2 awaiting approval: `prime env push -p environments/dxenv-diagnostician --auto-bump` |
 
 Visibility is only set when an environment is created (`prime env push --visibility` is ignored afterwards); change it on the website.

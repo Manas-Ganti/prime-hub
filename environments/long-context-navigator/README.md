@@ -132,11 +132,19 @@ per step, since a step needs only a THOUGHT line and an ACTION line.
 
 ## Baseline results (vf-eval, this package)
 
-*Pending: no vf-eval run against a real model has been recorded yet.*
+Per-episode means from `scripts/episode_summary.py`. The run: `vf-eval -n 50 -r 1`, with the
+source repo's rollout sampling (T = 0.8, top_p = 0.95, 256 max tokens per step). The model was
+served unquantized (bf16) by vLLM 0.8.5 on one A100. Each split took under 2 minutes.
 
-| model | split | episodes | reward (mean ± SE) | accuracy | ceiling violations | steps / min |
-|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — |
+| model | split | episodes | reward (mean ± SE) | accuracy | ceiling exceeded | step budget exhausted | wrong answer |
+|---|---|---|---|---|---|---|---|
+| Qwen2.5-7B-Instruct | `id_test` (2–3 hops) | 50 | −0.350 ± 0.033 | 0.00 | 66% | 4% | 30% |
+| Qwen2.5-7B-Instruct | `ood_test` (4–5 hops) | 50 | −0.460 ± 0.019 | 0.00 | 90% | 2% | 8% |
+
+The untrained 7B model never answers correctly. It mostly fails by loading a second chunk
+before compressing the first, which breaks the 600-token ceiling. It compressed in only 8%
+(`id_test`) and 2% (`ood_test`) of episodes. This matches the original work's
+in-environment result for the same model (0.000 on both splits, below).
 
 ## Original results (separate harness)
 
