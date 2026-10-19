@@ -1,6 +1,6 @@
 [project]
 name = "dxenv-diagnostician"
-version = "0.1.1"
+version = "0.1.2"
 description = "Cost-aware diagnosis over synthetic patients: order tests (with committed result predictions), prescribe, then report a distribution over 149 conditions. Severity-weighted proper Brier score minus test and turn costs, with a computable Bayes-optimal ceiling. Procedural data, no judge."
 requires-python = ">=3.11"
 license = "MIT"

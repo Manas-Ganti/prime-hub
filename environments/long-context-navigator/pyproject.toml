@@ -1,6 +1,6 @@
 [project]
 name = "long-context-navigator"
-version = "0.1.1"
+version = "0.1.2"
 description = "Multi-hop QA over a ~32k-token document under a hard 600-token working-context ceiling: the agent must READ, COMPRESS and DROP to carry bridge entities. Stateless per-step policy, exact-match reward, procedurally generated and validated instances."
 requires-python = ">=3.11"
 license = "MIT"

@@ -58,7 +58,7 @@ meaning the exploits are live in the source reward code).
 
 | env | Hub | version | visibility | notes |
 |---|---|---|---|---|
-| long-context-navigator | manasganti/long-context-navigator | 0.1.1 | PUBLIC (2026-10-18) | baselines in README (ARC vLLM run 2026-10-19); 0.1.2 awaiting approval: `prime env push -p environments/long-context-navigator --auto-bump` |
-| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.1 | PUBLIC (2026-10-18) | includes the structured-output schema fix; baselines in README; 0.1.2 awaiting approval: `prime env push -p environments/dxenv-diagnostician --auto-bump` |
+| long-context-navigator | manasganti/long-context-navigator | 0.1.2 | PUBLIC (2026-10-18) | 0.1.2 (2026-10-19) adds vf-eval baselines (ARC vLLM run) |
+| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.2 | PUBLIC (2026-10-18) | 0.1.1 has the structured-output schema fix; 0.1.2 (2026-10-19) adds vf-eval baselines and the README output-format update |
 
 Visibility is only set when an environment is created (`prime env push --visibility` is ignored afterwards); change it on the website.
