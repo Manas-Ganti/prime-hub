@@ -58,7 +58,7 @@ meaning the exploits are live in the source reward code).
 
 | env | Hub | version | visibility | notes |
 |---|---|---|---|---|
-| long-context-navigator | manasganti/long-context-navigator | 0.1.2 | PUBLIC (2026-10-18) | 0.1.2 (2026-10-19) adds vf-eval baselines (ARC vLLM run) |
-| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.2 | PUBLIC (2026-10-18) | 0.1.1 has the structured-output schema fix; 0.1.2 (2026-10-19) adds vf-eval baselines and the README output-format update |
+| long-context-navigator | manasganti/long-context-navigator | 0.1.3 (ready to push) | PUBLIC (2026-10-18) | 0.1.2 (2026-10-19) adds vf-eval baselines (ARC vLLM run); 0.1.3 adds Hub tags (`[project].tags`; the CLI ignores `keywords`) |
+| dxenv-diagnostician | manasganti/dxenv-diagnostician | 0.1.3 (ready to push) | PUBLIC (2026-10-18) | 0.1.1 has the structured-output schema fix; 0.1.2 (2026-10-19) adds vf-eval baselines and the README output-format update; 0.1.3 adds Hub tags |
 
 Visibility is only set when an environment is created (`prime env push --visibility` is ignored afterwards); change it on the website.
